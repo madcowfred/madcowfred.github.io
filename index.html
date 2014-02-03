@@ -128,11 +128,12 @@ play with one of these some day, but in PADherder&#39;s case the data is highly 
 
 <h2>memcached</h2>
 
-<p><a href="http://memcached.org/">Memcached</a> is a &quot;high-performance, distributed memory object caching system&quot;.</p>
+<p><a href="http://memcached.org/">Memcached</a> is a &quot;high-performance, distributed memory object caching system&quot;. It&#39;s an extremely fast way of storing
+and retrieving data by key and generally used to cache data in memory. Django has built-in</p>
 
-<p>Django&#39;s built-in caching only supports Memcached by default, and I already had it installed for other uses. <a href="http://redis.io/">Redis</a> can
-be used for the same purpose (and is much more advanced than a simple key/value store) and is on my list of things to play with
-some day.</p>
+<p>Django&#39;s only supports Memcached by default, and I already had it installed for other uses, so it seemed like the obvious choice.
+<a href="http://redis.io/">Redis</a> can be used for the same purpose (and is much more advanced than a simple key/value store) and is on my list of things
+to play with some day.</p>
 
 <p>PADherder uses Memcached via the built-in Django cache system, it&#39;s as simple as this:</p>
 

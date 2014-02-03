@@ -3,7 +3,7 @@
   <title>Words from the Waffle Monster</title>
   <link href="http://www.wafflemonster.org"/>
   <link type="application/atom+xml" rel="self" href="http://www.wafflemonster.org/atom.xml"/>
-  <updated>2014-02-03T18:38:24+10:30</updated>
+  <updated>2014-02-03T21:13:28+10:30</updated>
   <id>http://www.wafflemonster.org/</id>
   <author>
     <name>Freddie</name>
@@ -87,11 +87,12 @@ play with one of these some day, but in PADherder&amp;#39;s case the data is hig
 
 &lt;h2&gt;memcached&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://memcached.org/&quot;&gt;Memcached&lt;/a&gt; is a &amp;quot;high-performance, distributed memory object caching system&amp;quot;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://memcached.org/&quot;&gt;Memcached&lt;/a&gt; is a &amp;quot;high-performance, distributed memory object caching system&amp;quot;. It&amp;#39;s an extremely fast way of storing
+and retrieving data by key and generally used to cache data in memory. Django has built-in&lt;/p&gt;
 
-&lt;p&gt;Django&amp;#39;s built-in caching only supports Memcached by default, and I already had it installed for other uses. &lt;a href=&quot;http://redis.io/&quot;&gt;Redis&lt;/a&gt; can
-be used for the same purpose (and is much more advanced than a simple key/value store) and is on my list of things to play with
-some day.&lt;/p&gt;
+&lt;p&gt;Django&amp;#39;s only supports Memcached by default, and I already had it installed for other uses, so it seemed like the obvious choice.
+&lt;a href=&quot;http://redis.io/&quot;&gt;Redis&lt;/a&gt; can be used for the same purpose (and is much more advanced than a simple key/value store) and is on my list of things
+to play with some day.&lt;/p&gt;
 
 &lt;p&gt;PADherder uses Memcached via the built-in Django cache system, it&amp;#39;s as simple as this:&lt;/p&gt;
 
