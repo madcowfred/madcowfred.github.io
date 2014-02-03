@@ -3,7 +3,7 @@
   <title>Words from the Waffle Monster</title>
   <link href="http://www.wafflemonster.org"/>
   <link type="application/atom+xml" rel="self" href="http://www.wafflemonster.org/atom.xml"/>
-  <updated>2014-02-03T18:29:03+10:30</updated>
+  <updated>2014-02-03T18:38:24+10:30</updated>
   <id>http://www.wafflemonster.org/</id>
   <author>
     <name>Freddie</name>
@@ -20,9 +20,9 @@
       <name>Freddie</name>
       <uri>http://www.wafflemonster.org/</uri>
     </author>
-    <content type="html">&lt;p&gt;This post is part 1 of a seriesabout the exceptionally average selection of technologies used to build &lt;a href=&quot;http://www.padherder.com/&quot;&gt;PADherder&lt;/a&gt;.
-This isn&amp;#39;t intended to be a HOWTO post (though I may look at doing one in the future), I&amp;#39;d just like to have something handy to
-link people when they ask what secret powerful magic I&amp;#39;ve used.&lt;/p&gt;
+    <content type="html">&lt;p&gt;This post is part 1 of a series about the exceptionally average technologies used to build &lt;a href=&quot;http://www.padherder.com/&quot;&gt;PADherder&lt;/a&gt;. This isn&amp;#39;t intended
+to be a HOWTO post (though I may look at doing one in the future), I&amp;#39;d just like to have something handy to link people when they ask
+what secret powerful magic I&amp;#39;ve used.&lt;/p&gt;
 
 &lt;h2&gt;Django&lt;/h2&gt;
 
