@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Words from the Waffle Monster</title>
+  <link href="http://www.wafflemonster.org"/>
+  <link type="application/atom+xml" rel="self" href="http://www.wafflemonster.org/atom.xml"/>
+  <updated>2014-02-03T18:29:03+10:30</updated>
+  <id>http://www.wafflemonster.org/</id>
+  <author>
+    <name>Freddie</name>
+    <email>freddie@wafflemonster.org</email>
+  </author>
+
+  
+  <entry>
+    <id>http://www.wafflemonster.org/2014/02/03/tech-behind-padherder-part-1</id>
+    <link type="text/html" rel="alternate" href="http://www.wafflemonster.org/2014/02/03/tech-behind-padherder-part-1/"/>
+    <title>The technology behind PADherder, part 1</title>
+    <updated>2014-02-03T06:52:00Z</updated>
+    <author>
+      <name>Freddie</name>
+      <uri>http://www.wafflemonster.org/</uri>
+    </author>
+    <content type="html">&lt;p&gt;This post is part 1 of a seriesabout the exceptionally average selection of technologies used to build &lt;a href=&quot;http://www.padherder.com/&quot;&gt;PADherder&lt;/a&gt;.
+This isn&amp;#39;t intended to be a HOWTO post (though I may look at doing one in the future), I&amp;#39;d just like to have something handy to
+link people when they ask what secret powerful magic I&amp;#39;ve used.&lt;/p&gt;
+
+&lt;h2&gt;Django&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.djangoproject.com/&quot;&gt;Django&lt;/a&gt; is &amp;quot;a high-level Python Web framework that encourages rapid development and clean, pragmatic design&amp;quot;. I chose to
+use Django because I already had experience developing applications with it (&lt;a href=&quot;https://github.com/madcowfred/evething/&quot;&gt;EVEthing&lt;/a&gt; in particular).&lt;/p&gt;
+
+&lt;h3&gt;Pros:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Open source!&lt;/li&gt;
+&lt;li&gt;Comes with &amp;quot;batteries included&amp;quot;, saving lots of time and effort for basic web app things:
+
+&lt;ul&gt;
+&lt;li&gt;Request handling&lt;/li&gt;
+&lt;li&gt;Sessions&lt;/li&gt;
+&lt;li&gt;Authentication&lt;/li&gt;
+&lt;li&gt;Caching&lt;/li&gt;
+&lt;li&gt;Database access/ORM (finally has persistent DB connections in 1.6!)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Actively developed.&lt;/li&gt;
+&lt;li&gt;Excellent project documentation and masses of community blog posts/tutorials/etc.&lt;/li&gt;
+&lt;li&gt;Solid security record.&lt;/li&gt;
+&lt;li&gt;Good selection of &lt;a href=&quot;https://www.djangopackages.com/&quot;&gt;pluggable packages&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Cons:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The built-in templating language is slow (&lt;a href=&quot;http://tomforb.es/just-how-slow-are-django-templates&quot;&gt;&amp;#39;Just how slow are Django templates?&amp;#39;&lt;/a&gt;), especially if you are displaying
+a lot of data. I get around this by using &lt;a href=&quot;http://jingo.readthedocs.org/en/latest/&quot;&gt;Jingo&lt;/a&gt; to replace the templating engine with &lt;a href=&quot;http://jinja.pocoo.org/2/&quot;&gt;Jinja2&lt;/a&gt;, a &lt;em&gt;much&lt;/em&gt; faster
+alternative.&lt;/li&gt;
+&lt;li&gt;No built-in support for database migrations - applying database changes (add/change/delete models, etc) in a way that works no
+matter what database you&amp;#39;re running, while also allowing wonderful things like being able to revert changes. &lt;a href=&quot;http://south.readthedocs.org/en/latest/about.html&quot;&gt;South&lt;/a&gt; is a
+widely used Django app that provides this functionality, though it would be nice to have it built-in so nobody else makes the mistake
+of developing without it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;PostgreSQL&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.postgresql.org/&quot;&gt;PostgreSQL&lt;/a&gt; is &amp;quot;a powerful, open source object-relational database system&amp;quot;. Relational databases are a powerful tool, and
+the Django ORM (Object-Relational Mapper) makes even complicated table joins very easy.&lt;/p&gt;
+
+&lt;h3&gt;Pros:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Open source!&lt;/li&gt;
+&lt;li&gt;Good support for modern SQL features.&lt;/li&gt;
+&lt;li&gt;Can run table modifications inside transactions, which makes South much happier.&lt;/li&gt;
+&lt;li&gt;Much better query planner than its main rival, MySQL. Still not as good as &lt;a href=&quot;https://www.periscope.io/blog/count-distinct-in-mysql-postgres-sql-server-and-oracle.html&quot;&gt;MS SQL/Oracle&lt;/a&gt; in some cases.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Cons:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Less widely used than MySQL - you&amp;#39;re much more likely to have hosting with MySQL available.&lt;/li&gt;
+&lt;li&gt;You&amp;#39;ll probably end up needing to run MySQL alongside it if you want to host other open source webapps, especially anything
+written in PHP.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The other option would have been something in the &amp;quot;NoSQL&amp;quot; area - &lt;a href=&quot;http://www.mongodb.org/&quot;&gt;MongoDB&lt;/a&gt;, &lt;a href=&quot;http://cassandra.apache.org/&quot;&gt;Cassandra&lt;/a&gt;, etc. I would like to
+play with one of these some day, but in PADherder&amp;#39;s case the data is highly relational and a traditional RDBMS is very suitable.&lt;/p&gt;
+
+&lt;h2&gt;memcached&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://memcached.org/&quot;&gt;Memcached&lt;/a&gt; is a &amp;quot;high-performance, distributed memory object caching system&amp;quot;.&lt;/p&gt;
+
+&lt;p&gt;Django&amp;#39;s built-in caching only supports Memcached by default, and I already had it installed for other uses. &lt;a href=&quot;http://redis.io/&quot;&gt;Redis&lt;/a&gt; can
+be used for the same purpose (and is much more advanced than a simple key/value store) and is on my list of things to play with
+some day.&lt;/p&gt;
+
+&lt;p&gt;PADherder uses Memcached via the built-in Django cache system, it&amp;#39;s as simple as this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.core.cache&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cache&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;some_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# Try retrieving friends data from the cache first&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cache_key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;friends:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%d&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;friends&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cache_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;friends&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;friends&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build_friends_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cache_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;friends&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;600&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Render the page&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;uWSGI&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://uwsgi-docs.readthedocs.org/en/latest/&quot;&gt;uWSGI&lt;/a&gt; is a fast (and complicated) piece of software used as an &amp;quot;application server&amp;quot; in our case. Django provides a &lt;code&gt;wsgi.py&lt;/code&gt;
+file to speak the &lt;a href=&quot;http://wsgi.readthedocs.org/en/latest/&quot;&gt;WSGI protocol&lt;/a&gt;, uWSGI uses that file to host the Django application, and nginx interfaces with uWSGI via the
+uWSGI protocol - it&amp;#39;s exactly as complicated as it sounds. The Django documentation has a &lt;a href=&quot;https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/uwsgi/&quot;&gt;good guide&lt;/a&gt; on getting uWSGI up
+and running.&lt;/p&gt;
+
+&lt;p&gt;If using nginx, &lt;a href=&quot;https://github.com/benoitc/gunicorn&quot;&gt;gunicorn&lt;/a&gt; is another option to do the exact same thing, though I&amp;#39;ve never used it. If using Apache,
+&lt;a href=&quot;http://code.google.com/p/modwsgi/&quot;&gt;mod_wsgi&lt;/a&gt; is the way to go.&lt;/p&gt;
+
+&lt;h2&gt;nginx&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://nginx.org/en/&quot;&gt;nginx&lt;/a&gt; is an HTTP server, though it can also be used to do other strange and wonderful things. PADherder uses nginx to serve
+static files (images, CSS, etc) while passing any other requests through to Django.&lt;/p&gt;
+
+&lt;p&gt;nginx&amp;#39;s main competitor is the &lt;a href=&quot;http://httpd.apache.org/&quot;&gt;Apache HTTPD Server&lt;/a&gt;, still the most used HTTP server on the internet. I switched away from Apache
+on my firewall/dev server years ago for memory reasons (it had 32MB of RAM!) and haven&amp;#39;t had any reason to go back, so I&amp;#39;m not entirely sure
+what the performance/memory difference is like these days. I&amp;#39;ve also never hosted a site popular enough to even come &lt;em&gt;close&lt;/em&gt; to hitting the
+limits of HTTP server performance!&lt;/p&gt;
+
+&lt;p&gt;This is the entirety of the PADherder server config block:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;server {
+    server_name     www.padherder.com;
+    access_log      /path/to/logs/padherder.com.access.log;
+    root            /path/to/padherder.com/html;
+
+    # try the request, then the request as a directory, then pass to @wsgi
+    try_files       $uri $uri/ @wsgi;
+
+    location @wsgi {
+        uwsgi_pass  unix:///path/to/padherder_uwsgi.sock;
+        include    uwsgi_params;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+  </entry>
+  
+ </feed>
