@@ -76,8 +76,11 @@ pre {
   margin: 0 -10px 2px;
   padding: 3px 10px;
   border-bottom: 1px solid #ccc;
-  /*background: #0f3a58;*/
-  /*color: #eee;*/
+}
+.sidebar-border {
+  border-bottom: 1px solid #e4e4e4;
+  margin: 0 -10px;
+  padding: 0 10px;
 }
 
 
@@ -140,6 +143,24 @@ pre {
   padding-bottom: 5px;
   color: #999;
   border-bottom: 1px solid #ccc;
+}
+
+
+/* Blog archives */
+.blog-archive {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 3px;
+}
+.blog-archive:nth-child(2) {
+  border-top: 1px solid #ccc;
+  margin-top: 5px;
+}
+.blog-archive-link {
+  font-size: 24px;
+}
+.blog-archive-meta {
+  margin: -3px 0 5px;
+  color: #999;
 }
 
 

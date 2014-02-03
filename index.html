@@ -28,11 +28,11 @@
             <p>Hi, I'm "Freddie", and this is my personal blog about stuff. I'm presently doing very little while I wait
             to be able to finish my degree.</p>
             <ul class="list-unstyled">
-              <li><a href="mailto:freddie@wafflemonster.org">freddie@wafflemonster.org</a></li>
-            </ul>
-            <ul class="list-unstyled">
               <li><a href="https://github.com/madcowfred">github.com/madcowfred</a></li>
               <li><a href="https://twitter.com/madcowfred">twitter.com/madcowfred</a></li>
+            </ul>
+            <ul class="list-unstyled">
+              <li><a href="/archive/">archive</a></li>
             </ul>
           </div>
 
@@ -49,7 +49,26 @@
             <h3>Recent Posts</h3>
             <ol class="list-unstyled">
 
-              <li><a href="/2014/02/03/tech-behind-padherder-part-1/">The technology behind PADherder, part 1</a></li>
+              <li class="sidebar-border"><a href="/2014/02/03/tech-behind-padherder-part-1/">The technology behind PADherder, part 1</a></li>
+
+            </ol>
+          </div>
+
+          <div class="sidebar-module">
+            <h3>Tags</h3>
+            <ol class="list-unstyled">
+
+              <li class="sidebar-border">
+                <a href="/tag/python">python</a> <span class="pull-right">1</span>
+              </li>
+
+              <li class="sidebar-border">
+                <a href="/tag/django">django</a> <span class="pull-right">1</span>
+              </li>
+
+              <li class="sidebar-border">
+                <a href="/tag/padherder">padherder</a> <span class="pull-right">1</span>
+              </li>
 
             </ol>
           </div>
@@ -58,10 +77,14 @@
         <div class="col-sm-12 blog-main">
           <div class="blog-content">
             
-          <div class="blog-post">
-            <h1 class="blog-post-title">The technology behind PADherder, part 1</h1>
-            <div class="blog-post-meta">2014-02-03 06:52:00 UTC | <a href="/2014/02/03/tech-behind-padherder-part-1/">permalink</a></div>
-            <p>This post is part 1 of a series about the exceptionally average technologies used to build <a href="http://www.padherder.com/">PADherder</a>. This isn&#39;t intended
+            <div class="blog-post">
+              <h1 class="blog-post-title">The technology behind PADherder, part 1</h1>
+              <div class="blog-post-meta">
+                Posted 03 Feb 2014
+                | <a href="/2014/02/03/tech-behind-padherder-part-1/">permalink</a>
+                | Tags: <a href="/tag/python">python</a>, <a href="/tag/django">django</a>, <a href="/tag/padherder">padherder</a>
+              </div>
+              <p>This post is part 1 of a series about the exceptionally average technologies used to build <a href="http://www.padherder.com/">PADherder</a>. This isn&#39;t intended
 to be a HOWTO post (though I may look at doing one in the future), I&#39;d just like to have something handy to link people when they ask
 what secret powerful magic I&#39;ve used.</p>
 
@@ -129,13 +152,14 @@ play with one of these some day, but in PADherder&#39;s case the data is highly 
 <h2>memcached</h2>
 
 <p><a href="http://memcached.org/">Memcached</a> is a &quot;high-performance, distributed memory object caching system&quot;. It&#39;s an extremely fast way of storing
-and retrieving data by key and generally used to cache data in memory. Django has built-in</p>
+and retrieving data by key and widely used to cache data in memory. Django has good support for caching - entire pages, portions
+of pages (using the {% cache %} template tag), or finer-grained caching in view functions as shown below.</p>
 
 <p>Django&#39;s only supports Memcached by default, and I already had it installed for other uses, so it seemed like the obvious choice.
 <a href="http://redis.io/">Redis</a> can be used for the same purpose (and is much more advanced than a simple key/value store) and is on my list of things
 to play with some day.</p>
 
-<p>PADherder uses Memcached via the built-in Django cache system, it&#39;s as simple as this:</p>
+<p>PADherder mostly uses Memcached via Django&#39;s cache helper functions:</p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">from</span> <span class="nn">django.core.cache</span> <span class="kn">import</span> <span class="n">cache</span>
 
@@ -185,7 +209,7 @@ limits of HTTP server performance!</p>
     }
 }
 </code></pre></div>
-          </div>
+            </div>
 
 
           </div>
